@@ -118,3 +118,56 @@ const ron = PersonFactory.makePerson('Ron', 17, 'Poudlard', 'Gryffondor', [
 
 ron.sayHello();
 ```
+
+### 1.4. La syntaxe ES6
+
+ES6 est une version de Javascript qui est sortie en 2015, elle a apporté de nouvelles fonctionnalités, la syntaxe des classes, les fonctions fléchées, les littéraux de gabarits, let et const, le new, etc.
+
+On va refaire la factory avec la syntaxe POO de ES6.
+
+```js
+// on peut créer une classe
+
+class Wizard {
+  // les attributs, il est facultatif de les lister mais c'est une bonne pratique
+  // on accède aux attributs avec le mot clé this
+  firstname;
+  lastname;
+  age;
+
+  // Il faut un constructeur, c'est une méthode qui est appelée lorsqu'on crée une instance de la classe
+  // Le constructeur est la méthode qui construit l'objet
+  constructor(firstname, lastname, age) {
+    // on peut initialiser les attributs
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.age = age;
+  }
+
+  // l'avantage de cette syntaxe est qu'on peut ajouter les méthodes que l'on veut, mais il faut utiliser le mot clé this pour accéder aux attributs
+  sayHello() {
+    console.log(`Hello, my name is ${this.firstname} ${this.lastname} !`);
+  }
+
+  castSpell() {
+    console.log(`
+        ${this.firstname} : Expelliarmus !
+        `);
+  }
+}
+
+// on peut créer une instance de la classe Wizard via le mot clé new
+// le mot clé new va appeler le constructeur de la classe
+const harry = new Wizard('Harry', 'Potter', 10);
+harry.sayHello();
+harry.castSpell();
+
+// on peut créer une seconde classe facilement
+const hermione = new Wizard('Hermione', 'Granger', 11);
+hermione.sayHello();
+hermione.castSpell();
+```
+
+```
+
+```
