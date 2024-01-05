@@ -1,5 +1,15 @@
 # La POO
 
+## Sommaire
+
+- [1. Qu'est-ce que la POO ?](#1-quest-ce-que-la-poo)
+  - [Qu'est-ce qu'un objet ?](#12-quest-ce-quun-objet)
+  - [Le desing pattern de la Factory](#13-le-desing-pattern-de-la-factory)
+  - [La syntaxe ES6](#14-la-syntaxe-es6)
+  - [Les getters et les setters](#15-les-getters-et-les-setters)
+- [2. L'héritage](#2-lhéritage)
+  - [Qu'est-ce que l'héritage ?](#21-quest-ce-que-lhéritage)
+
 ## 1. Qu'est-ce que la POO ?
 
 En Javascript, la `POO` est un sucre syntaxique, certains langages n'ont pas d'objet de base, mais en Javascript, si, on a : {}.
@@ -18,7 +28,7 @@ Derrière la POO, il y a la notion de **factory** (usine), c'est une fonction de
 
 Un design pattern est une solution à un problème récurrent.
 La factory est une fonction qui va servir à créer un objet.
-La factory est un moule pour créer des instances d'objets qui ont les mêmes propriétés et les mêmes méthodes.
+La factory est un moule pour créer des instances d'objets qui ont les mêmes propertys et les mêmes méthodes.
 
 ```js
 const harry = {
@@ -179,7 +189,7 @@ dumbledore.castSpell();
 Le mot clé `this` permet d'accéder aux attributs et aux méthodes de l'instance courante de la classe. Il permet de faire référence à l'objet courant.
 Il est de bonne pratique de mettre la fabrique dans un fichier à part et de l'exporter. Pour pouvoir l'utiliser ailleurs, mais c'est plus lisible.
 
-On peut utiliser # devant une propriété pour la rendre privée, on ne peut plus y accéder de l'extérieur de la classe.
+On peut utiliser # devant une property pour la rendre privée, on ne peut plus y accéder de l'extérieur de la classe.
 
 ```js
 class vehicule {
@@ -245,7 +255,9 @@ console.log(clio.enginePower); // Affiche la puissance du moteur
 
 Le getter est une méthode qui permet de récupérer la valeur d'un attribut privé, c'est une interface de lecture. Alors que le setter est une méthode qui permet de modifier la valeur d'un attribut privé, c'est une interface d'écriture qui nous permet de faire de la validation.
 
-### 2. l'héritage
+### 2. L'héritage
+
+#### 2.1. Qu'est-ce que l'héritage ?
 
 L'héritage est un principe de la `POO` qui permet de créer une classe à partir d'une autre classe. La classe mère est appelée la classe parent et la classe fille est appelée la classe enfant.
 
@@ -317,3 +329,53 @@ L'intérêt de l'héritage est de pouvoir réutiliser du code, on peut créer un
 Surcharger une méthode, c'est redéfinir une méthode dans une classe enfant. On peut aussi appeler une méthode de la classe parent dans une classe enfant avec le mot clé `super` comme le constructeur ou autre.
 
 Il faut toujours réécrire le constructeur dans une classe enfant, car toute classe doit avoir un `constructeur`.
+
+### Bonnes pratiques
+
+Pour éviter d'avoir des 50 paramètres dans le constructeur, on peut utiliser le `littéral d'objet` pour passer des paramètres à la classe.
+
+```js
+// pour éviter ça
+class vehicule {
+  property1;
+  property2;
+  property3;
+  property4;
+  property5;
+  property6;
+
+  constructor(
+    property1,
+    property2,
+    property3,
+    property4,
+    property5,
+    property6
+  ) {
+    this.property1 = property1;
+    this.property2 = property2;
+    this.property3 = property3;
+    this.property4 = property4;
+    this.property5 = property5;
+    this.property6 = property6;
+  }
+}
+
+// on peut faire ça et utiliser un littéral d'objet
+class vehicule {
+  property = {
+    property1: '',
+    property2: '',
+    property3: '',
+    property4: '',
+    property5: '',
+    property6: '',
+  };
+
+  constructor(property) {
+    this.property = property;
+  }
+}
+```
+
+C'est plus lisible, plus facile à maintenir et plus facile à utiliser.
