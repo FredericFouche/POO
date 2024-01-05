@@ -247,7 +247,7 @@ Le getter est une méthode qui permet de récupérer la valeur d'un attribut pri
 
 ### 2. l'héritage
 
-L'héritage est un principe de la POO qui permet de créer une classe à partir d'une autre classe. La classe mère est appelée la classe parent et la classe fille est appelée la classe enfant.
+L'héritage est un principe de la `POO` qui permet de créer une classe à partir d'une autre classe. La classe mère est appelée la classe parent et la classe fille est appelée la classe enfant.
 
 ```js
 // on peut créer une classe parent qui s'appelle vehicule
@@ -261,6 +261,14 @@ class vehicule {
     this.color = color;
     this.enginePower = enginePower;
   }
+
+  start() {
+    console.log('Vehicule started');
+  }
+
+  stop() {
+    console.log('Vehicule stopped');
+  }
 }
 
 // on peut créer une classe enfant qui s'appelle car qui va hériter de vehicule
@@ -273,6 +281,7 @@ class car extends vehicule {
 
 // on peut créer une instance de la classe car
 const clio = new car('red', 100);
+clio.start(); // on peut appeler les méthodes de la classe parent car elles sont héritées
 
 // on peut créer une classe enfant qui s'appelle bike qui va hériter de vehicule
 class bike extends vehicule {
@@ -283,8 +292,9 @@ class bike extends vehicule {
 
 // on peut créer une instance de la classe bike
 const bmx = new bike('blue', 0);
+bmx.start(); // on peut appeler les méthodes de la classe parent car elles sont héritées
 ```
 
 L'intérêt de l'héritage est de pouvoir réutiliser du code, on peut créer une classe parent qui contient du code commun et créer des classes enfants qui vont hériter de la classe, on peut aussi surcharger des méthodes de la classe parent dans les classes enfants.
 
-Surcharger une méthode, c'est redéfinir une méthode dans une classe enfant. On peut aussi appeler une méthode de la classe parent dans une classe enfant avec le mot clé super comme le constructeur ou autre.
+Surcharger une méthode, c'est redéfinir une méthode dans une classe enfant. On peut aussi appeler une méthode de la classe parent dans une classe enfant avec le mot clé `super` comme le constructeur ou autre.
