@@ -178,3 +178,71 @@ dumbledore.castSpell();
 
 Le mot clé `this` permet d'accéder aux attributs et aux méthodes de l'instance courante de la classe. Il permet de faire référence à l'objet courant.
 Il est de bonne pratique de mettre la fabrique dans un fichier à part et de l'exporter. Pour pouvoir l'utiliser ailleurs, mais c'est plus lisible.
+
+On peut utiliser # devant une propriété pour la rendre privée, on ne peut plus y accéder de l'extérieur de la classe.
+
+```js
+class vehicule {
+  wheels;
+  color;
+  #isStarted = false; // on ne peut pas y accéder de l'extérieur de la classe
+
+  constructor(wheels, color) {
+    this.wheels = wheels;
+    this.color = color;
+  }
+
+  start() {
+    this.#isStarted = true;
+  }
+
+  stop() {
+    this.#isStarted = false;
+  }
+}
+
+const clio = new vehicule(4, 'red');
+clio.start();
+clio.stop();
+```
+
+### 1.5. Les getters et les setters
+
+Les getters et les setters sont des méthodes qui permettent de récupérer et de modifier des attributs privés.
+En reprenant l'exemple précédent, on peut créer des getters et des setters pour l'attribut privé #isStarted. C'est une interface pour accéder à l'attribut privé.
+
+```js
+class vehicule {
+  wheels;
+  color;
+  #enginePower;
+
+  constructor(wheels, color, enginePower) {
+    this.wheels = wheels;
+    this.color = color;
+    this.#enginePower = enginePower;
+  }
+
+  // Setter pour l'attribut privé #enginePower
+  set enginePower(enginePower) {
+    if (typeof enginePower !== 'number') {
+      throw new Error('enginePower must be a number');
+    } else {
+      this.#enginePower = enginePower;
+    }
+  }
+
+  // Getter pour l'attribut privé #enginePower
+  get enginePower() {
+    return this.#enginePower;
+  }
+}
+
+const clio = new vehicule(4, 'red', 100);
+clio.enginePower = 120; // Mise à jour de la puissance du moteur
+console.log(clio.enginePower); // Affiche la puissance du moteur
+```
+
+Le getter est une méthode qui permet de récupérer la valeur d'un attribut privé, c'est une interface de lecture. Alors que le setter est une méthode qui permet de modifier la valeur d'un attribut privé, c'est une interface d'écriture qui nous permet de faire de la validation.
+
+### 1.6. Les méthodes statiques
