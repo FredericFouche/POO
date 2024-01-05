@@ -175,3 +175,6 @@ const dumbledore = new Wizard('Albus', 'Dumbledore', 150, true);
 dumbledore.sayHello();
 dumbledore.castSpell();
 ```
+
+Le mot clé `this` permet d'accéder aux attributs et aux méthodes de l'instance courante de la classe. Il permet de faire référence à l'objet courant.
+Il est de bonne pratique de mettre la fabrique dans un fichier à part et de l'exporter. Pour pouvoir l'utiliser ailleurs, mais c'est plus lisible.
