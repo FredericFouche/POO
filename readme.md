@@ -137,11 +137,15 @@ class Wizard {
 
   // Il faut un constructeur, c'est une méthode qui est appelée lorsqu'on crée une instance de la classe
   // Le constructeur est la méthode qui construit l'objet
-  constructor(firstname, lastname, age) {
+  constructor(firstname, lastname, age, isProfessor) {
     // on peut initialiser les attributs
     this.firstname = firstname;
     this.lastname = lastname;
     this.age = age;
+    // on peut aussi initialiser des attributs qui ne sont pas tout le temps passés en paramètre
+    this.isProfessor = isProfessor || false; // on peut mettre une valeur par défaut
+
+    // ici on peut mettre de la validation aussi
   }
 
   // l'avantage de cette syntaxe est qu'on peut ajouter les méthodes que l'on veut, mais il faut utiliser le mot clé this pour accéder aux attributs
@@ -166,8 +170,8 @@ harry.castSpell();
 const hermione = new Wizard('Hermione', 'Granger', 11);
 hermione.sayHello();
 hermione.castSpell();
-```
 
-```
-
+const dumbledore = new Wizard('Albus', 'Dumbledore', 150, true);
+dumbledore.sayHello();
+dumbledore.castSpell();
 ```
