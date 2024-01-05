@@ -273,15 +273,32 @@ class vehicule {
 
 // on peut créer une classe enfant qui s'appelle car qui va hériter de vehicule
 class car extends vehicule {
-  constructor(color, enginePower) {
+  trunkSize; // on peut ajouter des attributs spécifiques à la classe enfant
+
+  constructor(color, enginePower, trunkSize) {
     // on peut appeler le constructeur de la classe parent avec le mot clé super et passer les paramètres du constructeur de la classe parent
     super(4, color, enginePower);
+    this.trunkSize = trunkSize;
+  }
+
+  // on peut surcharger des méthodes de la classe parent
+  start() {
+    console.log('Car started');
+  }
+
+  // ou ajouter des méthodes spécifiques à la classe enfant
+
+  openTrunk() {
+    console.log('Trunk opened');
+    console.log(`Trunk size : ${this.trunkSize}`);
+    console.log('Trunk closed');
   }
 }
 
 // on peut créer une instance de la classe car
-const clio = new car('red', 100);
+const clio = new car('red', 100, 1000);
 clio.start(); // on peut appeler les méthodes de la classe parent car elles sont héritées
+clio.openTrunk(); // on peut appeler les méthodes de la classe enfant
 
 // on peut créer une classe enfant qui s'appelle bike qui va hériter de vehicule
 class bike extends vehicule {
@@ -298,3 +315,5 @@ bmx.start(); // on peut appeler les méthodes de la classe parent car elles sont
 L'intérêt de l'héritage est de pouvoir réutiliser du code, on peut créer une classe parent qui contient du code commun et créer des classes enfants qui vont hériter de la classe, on peut aussi surcharger des méthodes de la classe parent dans les classes enfants.
 
 Surcharger une méthode, c'est redéfinir une méthode dans une classe enfant. On peut aussi appeler une méthode de la classe parent dans une classe enfant avec le mot clé `super` comme le constructeur ou autre.
+
+Il faut toujours réécrire le constructeur dans une classe enfant, car toute classe doit avoir un `constructeur`.
