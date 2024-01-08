@@ -24,5 +24,5 @@ $depotName = git remote -v | Select-String -Pattern "origin\s+(?<url>.+?)(\s|$)"
 # Afficher la date et l'heure du commit dans un format lisible dans la console PowerShell avec des couleurs
 Write-Host "#############################################################################################################" -ForegroundColor Cyan
 Write-Host " $commitDate on $depotName " -ForegroundColor Yellow
-Write-Host "Commit et push terminé !" 
+Write-Host "Commit et push terminé !" -ForegroundColor Green
 Write-Host "#############################################################################################################" -ForegroundColor Cyan
