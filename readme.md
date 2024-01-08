@@ -436,3 +436,5 @@ const clio = new toyota('red', 100);
 console.log(clio instanceof toyota); // true car clio est une instance de la classe toyota qui hérite de la classe vehicule
 console.log(clio instanceof vehicule); // true car clio est une instance qui hérite de la classe vehicule
 ```
+
+### 2.3.
