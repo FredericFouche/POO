@@ -536,3 +536,28 @@ Explication de cette regex :
     \. : Un point littéral séparant le nom de domaine de l'extension.
 
     [a-zA-Z]{2,}$ : Extension du domaine. Elle doit avoir au moins deux caractères, sans limite supérieure. Le $ indique la fin de la chaîne.
+
+autre exemple plus complexe :
+
+```js
+const emailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$;
+```
+
+    ^ : Commence l'expression régulière.
+
+    ([\w-]+(?:\.[\w-]+)*) :
+        [\w-]+ : Correspond à un ou plusieurs caractères alphanumériques ou tirets.
+        (?:\.[\w-]+)* : Un groupe non-capturant pour zéro ou plusieurs séquences de caractères précédées d'un point. Cela permet les parties locales de l'email avec des points (comme dans nom.prenom@example.com).
+
+    @ : Caractère at-symbol séparant la partie locale du nom de domaine.
+
+    ((?:[\w-]+\.)*\w[\w-]{0,66}) :
+        (?:[\w-]+\.) : Un groupe non-capturant pour une séquence de caractères alphanumériques ou tirets, suivie d'un point. Cela peut se répéter plusieurs fois pour permettre les sous-domaines.
+        \w[\w-]{0,66} : Assure que le nom de domaine est suivi d'au moins un caractère alphanumérique, puis jusqu'à 66 caractères alphanumériques ou tirets, pour respecter la longueur maximale des noms de domaine.
+
+    \.([a-z]{2,6}(?:\.[a-z]{2})?) :
+        . : Un point littéral.
+        [a-z]{2,6} : Correspond à l'extension de domaine, avec une longueur de 2 à 6 lettres minuscules.
+        (?:\.[a-z]{2})? : Un groupe non-capturant optionnel pour une seconde extension de domaine, comme .co.uk.
+
+    $ : Termine l'expression régulière.
