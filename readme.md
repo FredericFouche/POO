@@ -516,7 +516,7 @@ exemple :
 
 ```js
 // une regex pour valider un email
-const emailRegex = /\w+@\w+\.[a-zA-Z]{2,3}$/;
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 // on peut tester si une chaine de caractère est valide avec la méthode test
 console.log(emailRegex.test('azopeopaze')); // false
@@ -524,3 +524,15 @@ console.log(emailRegex.test('azopeopaze@')); // false
 console.log(emailRegex.test('azopeopaze@gmail')); // false
 console.log(emailRegex.test('azeiopaze@gmail.com')); // true
 ```
+
+Explication de cette regex :
+
+    ^[a-zA-Z0-9._%+-]+ : La partie locale de l'adresse e-mail. Elle autorise les lettres majuscules et minuscules, les chiffres, les points, les soulignés, les pourcentages, les plus et les tirets. Elle commence par ^, indiquant le début de la chaîne.
+
+    @ : Caractère at-symbol obligatoire dans les adresses e-mail.
+
+    [a-zA-Z0-9.-]+ : Nom de domaine, qui peut inclure des lettres, des chiffres, des points et des tirets.
+
+    \. : Un point littéral séparant le nom de domaine de l'extension.
+
+    [a-zA-Z]{2,}$ : Extension du domaine. Elle doit avoir au moins deux caractères, sans limite supérieure. Le $ indique la fin de la chaîne.
