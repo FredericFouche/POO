@@ -574,12 +574,64 @@ console.log(date instanceof Date); // true
 
 ## 3. Les design patterns
 
-### 3.1. Le data mapper
+### 3.1. Le Data Mapper
 
-Le data mapper est un design pattern qui permet de séparer la logique métier de la logique de persistance. Il permet de faire le lien entre la base de données et le code métier.
+Le Data Mapper est un motif de conception (design pattern) utilisé dans le développement de logiciels pour séparer efficacement la logique métier de la logique de persistance des données. Ce modèle est fondamental dans les architectures où la séparation des préoccupations est une priorité. Il agit comme un intermédiaire entre la base de données et la couche métier de l'application, assurant une interaction propre et organisée entre ces deux composants.
+
+Dans le modèle Data Mapper, les objets de la couche métier ne contiennent aucune logique de persistance des données. Cette responsabilité est déléguée à un objet séparé, le mapper, qui est responsable de transférer les données entre les objets et la base de données. Cette séparation offre plusieurs avantages :
+
+1. **Indépendance de la logique métier :** La logique métier reste pure et non polluée par les détails de la base de données. Cela signifie que les développeurs peuvent se concentrer sur la mise en œuvre des règles métier sans se soucier des aspects techniques de la gestion des données.
+
+2. **Flexibilité et maintenabilité :** Comme la logique de base de données est isolée, il est plus facile de modifier ou de maintenir le système. Les changements dans la structure de la base de données ou dans la logique métier peuvent être effectués indépendamment, réduisant ainsi les risques d'erreurs et simplifiant les mises à jour.
+
+3. **Réutilisabilité :** Les mappers peuvent être réutilisés pour différentes entités métier, ce qui favorise le respect du principe DRY (Don't Repeat Yourself) et conduit à un code plus propre et plus efficace.
+
+4. **Testabilité :** Les composants séparés sont plus faciles à tester. Les tests unitaires pour la logique métier peuvent être effectués sans nécessiter d'accès à la base de données, rendant les tests plus rapides et plus fiables.
+
+En conclusion, le Data Mapper est une approche robuste pour la gestion des données dans les applications complexes. Il favorise un code bien structuré, facile à maintenir et à tester, tout en assurant une séparation claire entre les différentes préoccupations de l'application. Ce modèle est particulièrement utile dans les projets de grande envergure et ceux qui nécessitent une flexibilité élevée pour s'adapter aux changements constants des exigences métier et techniques.
 
 ### 3.2. L'active record
 
-C'est une instance de la classe qui est responsable de la persistance de ses données. C'est une classe qui contient des méthodes pour faire des requêtes en base de données.
+L'Active Record est un patron de conception utilisé dans le développement de logiciels pour faciliter la manipulation des données dans les bases de données. Il représente une instance de classe qui est chargée de la persistance de ses propres données. Cette approche se caractérise par l'intégration de fonctions de manipulation de données directement dans l'objet, simplifiant ainsi les interactions avec la base de données.
 
-C'est un objet qui wrap un enregistrement de la base de données et qui encapsule l'accès à la base de données. On peut y ajouter de la logique métier.
+**Définition des termes clés :**
+
+- Wrap (Englober) : Dans le contexte de l'Active Record, 'wrap' se réfère au processus d'englobement d'un enregistrement de la base de données dans un objet. Cela permet de manipuler les données de cet enregistrement comme s'il s'agissait des propriétés et méthodes de l'objet, rendant ainsi le code plus intuitif et plus proche du paradigme de la programmation orientée objet.
+
+- Encapsuler : L'encapsulation est un principe fondamental de la programmation orientée objet. Dans le cadre de l'Active Record, elle désigne la pratique de cacher les détails de l'accès et de la manipulation des données de la base de données à l'intérieur de l'objet. Ainsi, les modifications des données et les requêtes sont effectuées à travers une interface claire et contrôlée, ce qui renforce la sécurité et la maintenabilité du code.
+
+- Logique métier : La logique métier se réfère aux règles ou algorithmes qui gèrent la communication entre une base de données et les interfaces utilisateurs. Dans un modèle Active Record, on peut intégrer cette logique directement au sein de la classe. Cela permet non seulement de réaliser des opérations de base de données mais aussi d'y ajouter des fonctionnalités spécifiques au contexte de l'application, comme la validation des données ou le traitement de conditions spéciales.
+
+L'Active Record est donc un modèle puissant pour structurer l'accès et la manipulation des données dans les applications, en associant étroitement les données avec les comportements et règles les concernant. Cette méthode offre une approche intuitive et efficace pour gérer les interactions avec les bases de données, tout en gardant une structure claire et maintenable.
+
+exemple de code d'un active record :
+
+```js
+// instanciation du client
+const db = require('../db');
+
+// création de la classe
+class level {
+  id;
+  name;
+
+  constructort(obj) {
+    this.id = obj.id;
+    this.name = obj.name;
+  }
+
+  // méthode pour insérer un nouveau niveau
+  async insert() {
+    const result = await db.query(
+      `INSERT INTO level ("name")
+        VALUES ($1)
+        RETURNING id`,
+      this.name
+    );
+    return result;
+  }
+}
+
+// on exporte la classe
+module.exports = level;
+```
