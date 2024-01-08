@@ -22,6 +22,6 @@ $commitDate = git log -1 --format=%cd
 $depotName = git remote -v | Select-String -Pattern "origin\s+(?<url>.+?)(\s|$)" | ForEach-Object { $_.Matches[0].Groups["url"].Value }
 
 # Afficher la date et l'heure du commit dans un format lisible dans la console PowerShell avec des couleurs
-Write-Host "####################################################################################################################" -ForegroundColor Cyan
-Write-Host "### $commitDate on $depotName ###" -ForegroundColor Yellow
-Write-Host "####################################################################################################################" -ForegroundColor Cyan
+Write-Host "#############################################################################################################" -ForegroundColor Cyan
+Write-Host " $commitDate on $depotName " -ForegroundColor Yellow
+Write-Host "#############################################################################################################" -ForegroundColor Cyan
