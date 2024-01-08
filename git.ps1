@@ -19,6 +19,6 @@ git push
 $commitDate = git log -1 --format=%cd
 
 # Afficher la date et l'heure du commit dans un format lisible
-echo "#############################"
+echo "#####################################"
 echo "### $commitDate ###"
-echo "#############################"
+echo "#####################################"
