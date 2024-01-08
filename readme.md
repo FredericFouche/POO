@@ -400,8 +400,14 @@ class vehicule {
     property6: '',
   };
 
-  constructor(property) {
-    this.property = property;
+  // obj est michelisable
+  constructor(obj) {
+    this.property1 = obj.property1;
+    this.property2 = obj.property2;
+    this.property3 = obj.property3;
+    this.property4 = obj.property4;
+    this.property5 = obj.property5;
+    this.property6 = obj.property6;
   }
 }
 ```
