@@ -2,13 +2,20 @@
 
 ## Sommaire
 
-- [1. Qu'est-ce que la POO ?](#1-quest-ce-que-la-poo)
-  - [Qu'est-ce qu'un objet ?](#12-quest-ce-quun-objet)
-  - [Le desing pattern de la Factory](#13-le-desing-pattern-de-la-factory)
-  - [La syntaxe ES6](#14-la-syntaxe-es6)
-  - [Les getters et les setters](#15-les-getters-et-les-setters)
-- [2. L'héritage](#2-lhéritage)
-  - [Qu'est-ce que l'héritage ?](#21-quest-ce-que-lhéritage)
+- 1. [Qu'est-ce que la POO ?](#1-qu-est-ce-que-la-poo)
+  - 1.1. [Qu'est-ce qu'un objet ?](#11-qu-est-ce-qu-un-objet)
+  - 1.2. [Le desing pattern de la Factory](#12-le-desing-pattern-de-la-factory)
+  - 1.3. [La syntaxe ES6](#13-la-syntaxe-es6)
+  - 1.4. [Les getters et les setters](#14-les-getters-et-les-setters)
+  - 1.5. [Le this](#15-le-this)
+- 2. [L'héritage](#2-l-héritage)
+  - 2.1. [Qu'est-ce que l'héritage ?](#21-qu-est-ce-que-l-héritage)
+  - 2.2. [Instanceof](#22-instanceof)
+  - 2.3. [Les proxy](#23-les-proxy)
+- 3. [Les design patterns](#3-les-design-patterns)
+  - 3.1. [Le Data Mapper](#31-le-data-mapper)
+  - 3.2. [L'active record](#32-l-active-record)
+- 4. [Les REGEX](#4-les-regex)
 
 ## 1. Qu'est-ce que la POO ?
 
@@ -18,7 +25,7 @@ En JS, la `POO` au sens "design pattern", c'est facultatif, c'est une surcouche,
 
 Par exemple : L'orm `Sequelize` est basé sur de la POO.
 
-### 1.2. Qu'est-ce qu'un objet ?
+### 1.1. Qu'est-ce qu'un objet ?
 
 Un `objet` est une représentation de quelque chose dans le monde réel. Par exemple, un `objet` peut être une voiture, une personne, un animal, etc. Il peut être représenté par des `attributs` et des `méthodes`.
 
@@ -29,7 +36,7 @@ Il existe deux types d'objets :
 - Les plain objects : ce sont des objets simples, ils n'ont pas de méthodes, ils sont créés avec la syntaxe littérale.
 - Les instances d'objets : ce sont des objets qui ont des méthodes, ils sont créés avec le mot clé `new`.
 
-### 1.3. Le desing pattern de la Factory
+### 1.2. Le desing pattern de la Factory
 
 Un design pattern est une solution à un problème récurrent.
 La factory est une fonction qui va servir à créer un objet.
@@ -134,7 +141,7 @@ const ron = PersonFactory.makePerson('Ron', 17, 'Poudlard', 'Gryffondor', [
 ron.sayHello();
 ```
 
-### 1.4. La syntaxe ES6
+### 1.3. La syntaxe ES6
 
 ES6 est une version de Javascript qui est sortie en 2015, elle a apporté de nouvelles fonctionnalités, la syntaxe des classes, les fonctions fléchées, les littéraux de gabarits, let et const, le new, etc.
 
@@ -221,7 +228,7 @@ clio.start();
 clio.stop();
 ```
 
-### 1.5. Les getters et les setters
+### 1.4. Les getters et les setters
 
 Les getters et les setters sont des méthodes qui permettent de récupérer et de modifier des attributs privés.
 En reprenant l'exemple précédent, on peut créer des getters et des setters pour l'attribut privé #isStarted. C'est une interface pour accéder à l'attribut privé.
@@ -260,7 +267,7 @@ console.log(clio.enginePower); // Affiche la puissance du moteur
 
 Le getter est une méthode qui permet de récupérer la valeur d'un attribut privé, c'est une interface de lecture. Alors que le setter est une méthode qui permet de modifier la valeur d'un attribut privé, c'est une interface d'écriture qui nous permet de faire de la validation.
 
-### 1.6. Le this
+### 1.5. Le this
 
 Le mot-clé `this` en JavaScript est utilisé pour identifier l'objet qui est en train d'exécuter une méthode donnée. Sa valeur change selon l'objet qui invoque la méthode. En d'autres termes, `this` pointe vers l'instance actuelle de la classe où il est utilisé, permettant ainsi d'accéder aux attributs et méthodes spécifiques de cette instance.
 
@@ -499,84 +506,6 @@ clioProxy.color = 'blue'; // Writing property color
 console.log(clioProxy.color); // Reading property color
 ```
 
-### 2.4. Les REGEX
-
-Les expressions régulières (ou `REGEX`) sont des motifs utilisés pour faire des recherches et des remplacements dans les chaînes de caractères, ou pour valider des chaînes de caractères. Elles sont écrites dans une syntaxe concise et flexible, et permettent de rechercher des chaînes de caractères avec un niveau de contrôle très précis.
-
-| Symbole  | Description                                      |
-| -------- | ------------------------------------------------ |
-| \w       | Caractère alphanumérique ou \_                   |
-| \d       | Chiffre                                          |
-| \s       | Espace                                           |
-| \.       | Point                                            |
-| \w+      | Un ou plusieurs caractères alphanumériques ou \_ |
-| \d+      | Un ou plusieurs chiffres                         |
-| /        | Début de l'expression régulière                  |
-| $        | Fin de l'expression régulière                    |
-| [a-zA-Z] | Un caractère entre a et z ou entre A et Z        |
-| {2,3}    | Entre 2 et 3 caractères                          |
-| ^        | Début de la chaîne de caractère                  |
-
-exemple :
-
-```js
-// une regex pour valider un email
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-// on peut tester si une chaine de caractère est valide avec la méthode test
-console.log(emailRegex.test('azopeopaze')); // false
-console.log(emailRegex.test('azopeopaze@')); // false
-console.log(emailRegex.test('azopeopaze@gmail')); // false
-console.log(emailRegex.test('azeiopaze@gmail.com')); // true
-```
-
-Explication de cette regex :
-
-    ^[a-zA-Z0-9._%+-]+ : La partie locale de l'adresse e-mail. Elle autorise les lettres majuscules et minuscules, les chiffres, les points, les soulignés, les pourcentages, les plus et les tirets. Elle commence par ^, indiquant le début de la chaîne.
-
-    @ : Caractère at-symbol obligatoire dans les adresses e-mail.
-
-    [a-zA-Z0-9.-]+ : Nom de domaine, qui peut inclure des lettres, des chiffres, des points et des tirets.
-
-    \. : Un point littéral séparant le nom de domaine de l'extension.
-
-    [a-zA-Z]{2,}$ : Extension du domaine. Elle doit avoir au moins deux caractères, sans limite supérieure. Le $ indique la fin de la chaîne.
-
-autre exemple plus complexe :
-
-```js
-const emailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$;
-```
-
-    ^ : Commence l'expression régulière.
-
-    ([\w-]+(?:\.[\w-]+)*) :
-        [\w-]+ : Correspond à un ou plusieurs caractères alphanumériques ou tirets.
-        (?:\.[\w-]+)* : Un groupe non-capturant pour zéro ou plusieurs séquences de caractères précédées d'un point. Cela permet les parties locales de l'email avec des points (comme dans nom.prenom@example.com).
-
-    @ : Caractère at-symbol séparant la partie locale du nom de domaine.
-
-    ((?:[\w-]+\.)*\w[\w-]{0,66}) :
-        (?:[\w-]+\.) : Un groupe non-capturant pour une séquence de caractères alphanumériques ou tirets, suivie d'un point. Cela peut se répéter plusieurs fois pour permettre les sous-domaines.
-        \w[\w-]{0,66} : Assure que le nom de domaine est suivi d'au moins un caractère alphanumérique, puis jusqu'à 66 caractères alphanumériques ou tirets, pour respecter la longueur maximale des noms de domaine.
-
-    \.([a-z]{2,6}(?:\.[a-z]{2})?) :
-        . : Un point littéral.
-        [a-z]{2,6} : Correspond à l'extension de domaine, avec une longueur de 2 à 6 lettres minuscules.
-        (?:\.[a-z]{2})? : Un groupe non-capturant optionnel pour une seconde extension de domaine, comme .co.uk.
-
-    $ : Termine l'expression régulière.
-
-### Pour vérifier une date
-
-Il est possible de faire une vérification de date avec l'ojet `Date` de Javascript.
-
-```js
-const date = new Date('2021-01-01');
-
-console.log(date instanceof Date); // true
-```
-
 ## 3. Les design patterns
 
 ### 3.1. Le Data Mapper
@@ -737,3 +666,81 @@ module.exports = level;
 > **La différence principale entre le Data Mapper et l'Active Record réside dans la manière dont ils gèrent la séparation entre la logique métier et la persistance des données. le choix entre Data Mapper et Active Record dépend largement de la complexité de l'application et des besoins en matière de flexibilité, de maintenabilité, et d'évolutivité. Le Data Mapper est préférable pour les grandes applications avec des structures de données complexes et en évolution, tandis que l'Active Record convient mieux aux applications plus simples et plus petites. Certains développeurs considèrent que l'active record est un anti-pattern, car il mélange la logique métier et la logique de persistance des données. Pour une petite application, c'est Ok, car on fait du CRUD simple. Mais pour une grosse application, il vaut mieux utiliser le Data Mapper.**
 
 ---
+
+### 4. Les REGEX
+
+Les expressions régulières (ou `REGEX`) sont des motifs utilisés pour faire des recherches et des remplacements dans les chaînes de caractères, ou pour valider des chaînes de caractères. Elles sont écrites dans une syntaxe concise et flexible, et permettent de rechercher des chaînes de caractères avec un niveau de contrôle très précis.
+
+| Symbole  | Description                                      |
+| -------- | ------------------------------------------------ |
+| \w       | Caractère alphanumérique ou \_                   |
+| \d       | Chiffre                                          |
+| \s       | Espace                                           |
+| \.       | Point                                            |
+| \w+      | Un ou plusieurs caractères alphanumériques ou \_ |
+| \d+      | Un ou plusieurs chiffres                         |
+| /        | Début de l'expression régulière                  |
+| $        | Fin de l'expression régulière                    |
+| [a-zA-Z] | Un caractère entre a et z ou entre A et Z        |
+| {2,3}    | Entre 2 et 3 caractères                          |
+| ^        | Début de la chaîne de caractère                  |
+
+exemple :
+
+```js
+// une regex pour valider un email
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+// on peut tester si une chaine de caractère est valide avec la méthode test
+console.log(emailRegex.test('azopeopaze')); // false
+console.log(emailRegex.test('azopeopaze@')); // false
+console.log(emailRegex.test('azopeopaze@gmail')); // false
+console.log(emailRegex.test('azeiopaze@gmail.com')); // true
+```
+
+Explication de cette regex :
+
+    ^[a-zA-Z0-9._%+-]+ : La partie locale de l'adresse e-mail. Elle autorise les lettres majuscules et minuscules, les chiffres, les points, les soulignés, les pourcentages, les plus et les tirets. Elle commence par ^, indiquant le début de la chaîne.
+
+    @ : Caractère at-symbol obligatoire dans les adresses e-mail.
+
+    [a-zA-Z0-9.-]+ : Nom de domaine, qui peut inclure des lettres, des chiffres, des points et des tirets.
+
+    \. : Un point littéral séparant le nom de domaine de l'extension.
+
+    [a-zA-Z]{2,}$ : Extension du domaine. Elle doit avoir au moins deux caractères, sans limite supérieure. Le $ indique la fin de la chaîne.
+
+autre exemple plus complexe :
+
+```js
+const emailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$;
+```
+
+    ^ : Commence l'expression régulière.
+
+    ([\w-]+(?:\.[\w-]+)*) :
+        [\w-]+ : Correspond à un ou plusieurs caractères alphanumériques ou tirets.
+        (?:\.[\w-]+)* : Un groupe non-capturant pour zéro ou plusieurs séquences de caractères précédées d'un point. Cela permet les parties locales de l'email avec des points (comme dans nom.prenom@example.com).
+
+    @ : Caractère at-symbol séparant la partie locale du nom de domaine.
+
+    ((?:[\w-]+\.)*\w[\w-]{0,66}) :
+        (?:[\w-]+\.) : Un groupe non-capturant pour une séquence de caractères alphanumériques ou tirets, suivie d'un point. Cela peut se répéter plusieurs fois pour permettre les sous-domaines.
+        \w[\w-]{0,66} : Assure que le nom de domaine est suivi d'au moins un caractère alphanumérique, puis jusqu'à 66 caractères alphanumériques ou tirets, pour respecter la longueur maximale des noms de domaine.
+
+    \.([a-z]{2,6}(?:\.[a-z]{2})?) :
+        . : Un point littéral.
+        [a-z]{2,6} : Correspond à l'extension de domaine, avec une longueur de 2 à 6 lettres minuscules.
+        (?:\.[a-z]{2})? : Un groupe non-capturant optionnel pour une seconde extension de domaine, comme .co.uk.
+
+    $ : Termine l'expression régulière.
+
+### Pour vérifier une date
+
+Il est possible de faire une vérification de date avec l'ojet `Date` de Javascript.
+
+```js
+const date = new Date('2021-01-01');
+
+console.log(date instanceof Date); // true
+```
