@@ -579,3 +579,7 @@ console.log(date instanceof Date); // true
 Le data mapper est un design pattern qui permet de séparer la logique métier de la logique de persistance. Il permet de faire le lien entre la base de données et le code métier.
 
 ### 3.2. L'active record
+
+C'est une instance de la classe qui est responsable de la persistance de ses données. C'est une classe qui contient des méthodes pour faire des requêtes en base de données.
+
+C'est un objet qui wrap un enregistrement de la base de données et qui encapsule l'accès à la base de données. On peut y ajouter de la logique métier.
