@@ -15,7 +15,10 @@ git push
 # ### 2020-04-01 14:00:00 ###
 # ###########################
 
+# Obtenir la date et l'heure du dernier commit
+$commitDate = git log -1 --format=%cd
+
+# Afficher la date et l'heure du commit dans un format lisible
 echo "#############################"
 echo "### $commitDate ###"
 echo "#############################"
-
