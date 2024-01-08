@@ -255,6 +255,34 @@ console.log(clio.enginePower); // Affiche la puissance du moteur
 
 Le getter est une méthode qui permet de récupérer la valeur d'un attribut privé, c'est une interface de lecture. Alors que le setter est une méthode qui permet de modifier la valeur d'un attribut privé, c'est une interface d'écriture qui nous permet de faire de la validation.
 
+### 1.6. Le this
+
+Le mot-clé `this` en JavaScript est utilisé pour identifier l'objet qui est en train d'exécuter une méthode donnée. Sa valeur change selon l'objet qui invoque la méthode. En d'autres termes, `this` pointe vers l'instance actuelle de la classe où il est utilisé, permettant ainsi d'accéder aux attributs et méthodes spécifiques de cette instance.
+
+Pour les fonctions fléchées, la situation est un peu différente. Contrairement aux fonctions normales, elles n'ont pas leur propre contexte `this`. À la place, elles "empruntent" le `this` du contexte où elles sont créées. Cela signifie que le `this` à l'intérieur d'une fonction fléchée fait référence au même objet que le `this` dans son contexte extérieur.
+
+Par exemple :
+
+```js
+const person = {
+  name: 'John',
+  age: 30,
+  // cette méthode est une méthode normale et le this fait référence à l'objet person
+  sayHello: function () {
+    console.log(`Hello, my name is ${this.name}`);
+  },
+  // cette méthode est une méthode fléchée et le this fait référence à l'objet global c'est à dire window
+  sayHelloArrow: () => {
+    console.log(`Hello, my name is ${this.name}`);
+  },
+};
+
+person.sayHello(); // Hello, my name is John
+person.sayHelloArrow(); // Hello, my name is undefined
+```
+
+Cependant, l'utilisation de `this` peut parfois créer de la confusion, surtout lorsqu'on travaille avec des callbacks. Dans ces cas, `this` ne réfère pas toujours à l'objet attendu. Par exemple, si une méthode de classe est passée en tant que callback, le `this` à l'intérieur de cette méthode pourrait ne pas pointer vers l'instance de la classe, mais plutôt vers l'objet qui appelle le callback, ce qui peut mener à des erreurs inattendues.
+
 ### 2. L'héritage
 
 #### 2.1. Qu'est-ce que l'héritage ?
