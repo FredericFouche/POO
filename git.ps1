@@ -18,7 +18,10 @@ git push
 # Obtenir la date et l'heure du dernier commit
 $commitDate = git log -1 --format=%cd
 
+# Obtenir le nom du dépôt distant
+$depotName = git remote -v | Select-String -Pattern "origin\s+(?<url>.+?)(\s|$)" | % { $_.Matches[0].Groups["url"].Value }
+
 # Afficher la date et l'heure du commit dans un format lisible
 Write-Output "#####################################"
-Write-Output "### $commitDate ###"
+Write-Output "### $commitDate on $depotName ###"
 Write-Output "#####################################"
