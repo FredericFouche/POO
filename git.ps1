@@ -1,6 +1,9 @@
+
 # Vérifier si le dépôt a des modifications non commitées
 if (git status | Select-String -Pattern "nothing to commit, working tree clean") {
+    Write-Host "###############################################################################################################" -ForegroundColor Cyan
     Write-Host "Aucun changement détecté, rien à commiter !" -ForegroundColor Yellow
+    Write-Host "###############################################################################################################" -ForegroundColor Cyan
 } else {
     # Ajouter tous les fichiers modifiés à l'index
     git add .
@@ -20,7 +23,9 @@ if (git status | Select-String -Pattern "nothing to commit, working tree clean")
     $accountName, $repoName = $repoDetails.Split('/')[0..1]
 
     # Afficher les informations du commit
+    Write-Host "###############################################################################################################" -ForegroundColor Cyan
     Write-Host "Date du commit : $commitDateFormatted" -ForegroundColor Yellow
     Write-Host "Dépôt : $accountName / $repoName" -ForegroundColor Yellow
     Write-Host "Commit et push terminé !" -ForegroundColor Green
+    Write-Host "###############################################################################################################" -ForegroundColor Cyan
 }
