@@ -624,7 +624,22 @@ class level {
     }
   }
 
-  // update() et findById() sont des méthodes de classe ou méthodes statiques
+  // updateOne()
+  async updateOne() {
+    const result = await db.query(
+      `UPDATE level
+        SET name = $1
+        WHERE id = $2`,
+      [this.name, this.id]
+    );
+    if (result.rowCount > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // findById() sont des méthodes de classe ou méthodes statiques
 
   // méthode pour lire un niveau de id x
   static async findById(researchedID) {
@@ -639,7 +654,6 @@ class level {
       const level = new Level(resultLevel); // on crée une instance de la classe avec les données du tableau
       return level; // on retourne l'instance de la classe
     } else {
-      // sinon, cela veut dire qu'aucune ligne n'a été trouvée
       return null;
     }
   }
@@ -652,13 +666,11 @@ class level {
       [researchedName]
     );
     if (result.rowCount > 0) {
-      // si rowCount est supérieur à 0, cela veut dire qu'une ligne a été trouvée
       const resultLevel = result.rows[0]; // on récupère le niveau trouvé dans la base de données qui est un tableau
       // si resultLevel est null, cela veut dire qu'aucune ligne n'a été trouvée et on retourne null pour éviter une erreur
       const level = resultLevel ? new Level(resultLevel) : null; // on crée une instance de la classe avec les données du tableau si resultLevel n'est pas null
-      return level; // on retourne l'instance de la classe
+      return level;
     } else {
-      // sinon, cela veut dire qu'aucune ligne n'a été trouvée
       return null;
     }
   }
@@ -669,11 +681,9 @@ class level {
     const result = await db.query(`SELECT * FROM level`);
     // on crée une instance de la classe pour chaque ligne trouvée dans la base de données et on retourne un tableau d'instances de la classe
     if (result.rowCount > 0) {
-      // si rowCount est supérieur à 0, cela veut dire qu'une ligne a été trouvée
       const levels = result.rows.map((level) => new Level(level));
       return levels;
     } else {
-      // sinon, cela veut dire qu'aucune ligne n'a été trouvée
       return [];
     }
   }
