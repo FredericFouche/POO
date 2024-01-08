@@ -22,8 +22,7 @@ if (git status | Select-String -Pattern "nothing to commit, working tree clean")
     Write-Host "   Aucun changement détecté, rien à commiter !" -ForegroundColor Yellow
     Write-Host "###############################################################################################################" -ForegroundColor Cyan
     exit
-}
-
+} else {
 # Obtenir la date et l'heure du dernier commit dans un format standard ISO 8601
 $commitDateRaw = git log -1 --format=%cI
 
@@ -43,3 +42,4 @@ Write-Host "   Date du commit : $commitDateFormatted" -ForegroundColor Yellow
 Write-Host "   Dépôt : $accountName / $repoName" -ForegroundColor Yellow
 Write-Host "   Commit et push terminé !" -ForegroundColor Green
 Write-Host "###############################################################################################################" -ForegroundColor Cyan
+}
