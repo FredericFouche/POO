@@ -694,6 +694,21 @@ class level {
       return null;
     }
   }
+
+  //findall()
+  static async findAll() {
+    // la requête
+    const result = await db.query(`SELECT * FROM level`);
+    // on crée une instance de la classe pour chaque ligne trouvée dans la base de données et on retourne un tableau d'instances de la classe
+    if (result.rowCount > 0) {
+      // si rowCount est supérieur à 0, cela veut dire qu'une ligne a été trouvée
+      const levels = result.rows.map((level) => new Level(level));
+      return levels;
+    } else {
+      // sinon, cela veut dire qu'aucune ligne n'a été trouvée
+      return [];
+    }
+  }
 }
 
 // on exporte la classe
