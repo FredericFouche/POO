@@ -15,15 +15,20 @@ git push
 # ### 2020-04-01 14:00:00 ###
 # ###########################
 
-# Obtenir la date et l'heure du dernier commit
-$commitDateRaw = git log -1 --format=%cd
-$commitDate = Get-Date $commitDateRaw -Format "dddd, MMMM d, yyyy HH:mm:ss"
+# Obtenir la date et l'heure du dernier commit dans un format standard ISO 8601
+$commitDateRaw = git log -1 --format=%cI
+
+# Convertir la chaîne de date en un objet DateTime
+$commitDate = Get-Date $commitDateRaw -Format "yyyy-MM-ddTHH:mm:ssK"
+
+# Formater la date pour l'affichage
+$commitDateFormatted = $commitDate.ToString("dddd, MMMM d, yyyy HH:mm:ss")
 
 # Obtenir le nom du dépôt distant
 $depotName = git remote -v | Select-String -Pattern "origin\s+(?<url>.+?)(\s|$)" | ForEach-Object { $_.Matches[0].Groups["url"].Value }
 
 # Afficher la date et l'heure du commit dans un format lisible dans la console PowerShell avec des couleurs
 Write-Host "###############################################################################################################" -ForegroundColor Cyan
-Write-Host "   $commitDate on $depotName " -ForegroundColor Yellow
+Write-Host "   $commitDateFormatted on $depotName " -ForegroundColor Yellow
 Write-Host "   Commit et push terminé !" -ForegroundColor Green
 Write-Host "###############################################################################################################" -ForegroundColor Cyan
