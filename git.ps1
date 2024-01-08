@@ -21,9 +21,6 @@ $commitDateRaw = git log -1 --format=%cI
 # Convertir la chaîne de date en un objet DateTime et le formater pour l'affichage
 $commitDateFormatted = Get-Date $commitDateRaw -Format "dddd, MMMM d, yyyy HH:mm:ss"
 
-# Formater la date pour l'affichage
-$commitDateFormatted = $commitDate.ToString("dddd, MMMM d, yyyy HH:mm:ss")
-
 # Obtenir le nom du dépôt distant
 $depotName = git remote -v | Select-String -Pattern "origin\s+(?<url>.+?)(\s|$)" | ForEach-Object { $_.Matches[0].Groups["url"].Value }
 
