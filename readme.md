@@ -407,3 +407,32 @@ class vehicule {
 ```
 
 C'est plus lisible, plus facile à maintenir et plus facile à utiliser.
+
+### 2.2. Instanceof
+
+L'opérateur `instanceof` permet de vérifier si un objet est une instance d'une classe.
+
+```js
+class vehicule {
+  wheels;
+  color;
+  enginePower;
+
+  constructor(wheels, color, enginePower) {
+    this.wheels = wheels;
+    this.color = color;
+    this.enginePower = enginePower;
+  }
+}
+
+class toyota extends vehicule {
+  constructor(color, enginePower) {
+    super(4, color, enginePower);
+  }
+}
+
+const clio = new toyota('red', 100);
+
+console.log(clio instanceof toyota); // true car clio est une instance de la classe toyota qui hérite de la classe vehicule
+console.log(clio instanceof vehicule); // true car clio est une instance qui hérite de la classe vehicule
+```
