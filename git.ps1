@@ -31,6 +31,6 @@ $accountName, $repoName = $repoDetails.Split('/')[0..1]
 # Afficher la date et l'heure du commit dans un format lisible dans la console PowerShell avec des couleurs
 Write-Host "###############################################################################################################" -ForegroundColor Cyan
 Write-Host "   Date du commit : $commitDateFormatted" -ForegroundColor Yellow
-Write-Host "   Dépôt : $accountName / $repoName" -ForegroundColor Red
+Write-Host "   Dépôt : $accountName / $repoName" -ForegroundColor Yellow
 Write-Host "   Commit et push terminé !" -ForegroundColor Green
 Write-Host "###############################################################################################################" -ForegroundColor Cyan
