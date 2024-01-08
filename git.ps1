@@ -18,8 +18,8 @@ git push
 # Obtenir la date et l'heure du dernier commit dans un format standard ISO 8601
 $commitDateRaw = git log -1 --format=%cI
 
-# Convertir la chaîne de date en un objet DateTime
-$commitDate = Get-Date $commitDateRaw -Format "yyyy-MM-ddTHH:mm:ssK"
+# Convertir la chaîne de date en un objet DateTime et le formater pour l'affichage
+$commitDateFormatted = Get-Date $commitDateRaw -Format "dddd, MMMM d, yyyy HH:mm:ss"
 
 # Formater la date pour l'affichage
 $commitDateFormatted = $commitDate.ToString("dddd, MMMM d, yyyy HH:mm:ss")
