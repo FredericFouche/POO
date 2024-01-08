@@ -21,11 +21,12 @@ $commitDateRaw = git log -1 --format=%cI
 # Convertir la chaîne de date en un objet DateTime et le formater pour l'affichage
 $commitDateFormatted = Get-Date $commitDateRaw -Format "dddd d MMMM yyyy, HH:mm:ss"
 
-# Obtenir l'URL du dépôt distant et extraire le nom du compte et le nom du dépôt
+# Obtenir l'URL du dépôt distant
 $remoteUrl = git remote -v | Select-String -Pattern "origin\s+(?<url>git@github\.com:(.+)\.git)" | ForEach-Object { $_.Matches[0].Groups["url"].Value }
-$repoDetails = $remoteUrl -split '/' | Select-Object -Last 1
-$repoDetails = $repoDetails -replace 'git@github.com:', ''
-$accountName, $repoName = $repoDetails -split '/'
+
+# Extraire le nom du compte et le nom du dépôt
+$repoDetails = $remoteUrl -replace 'git@github.com:', ''
+$accountName, $repoName = $repoDetails.Split('/')[0..1]
 
 # Afficher la date et l'heure du commit dans un format lisible dans la console PowerShell avec des couleurs
 Write-Host "###############################################################################################################" -ForegroundColor Cyan

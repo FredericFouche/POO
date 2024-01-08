@@ -713,7 +713,8 @@ class level {
     if (result.rowCount > 0) {
       // si rowCount est supérieur à 0, cela veut dire qu'une ligne a été trouvée
       const resultLevel = result.rows[0]; // on récupère le niveau trouvé dans la base de données qui est un tableau
-      const level = new Level(resultLevel); // on crée une instance de la classe avec les données du tableau
+      // si resultLevel est null, cela veut dire qu'aucune ligne n'a été trouvée et on retourne null pour éviter une erreur
+      const level = resultLevel ? new Level(resultLevel) : null; // on crée une instance de la classe avec les données du tableau si resultLevel n'est pas null
       return level; // on retourne l'instance de la classe
     } else {
       // sinon, cela veut dire qu'aucune ligne n'a été trouvée
