@@ -22,6 +22,6 @@ $commitDate = git log -1 --format=%cd
 $depotName = git remote -v | Select-String -Pattern "origin\s+(?<url>.+?)(\s|$)" | % { $_.Matches[0].Groups["url"].Value }
 
 # Afficher la date et l'heure du commit dans un format lisible
-Write-Output "#####################################"
+Write-Output "###############################################################################################################"
 Write-Output "### $commitDate on $depotName ###"
-Write-Output "#####################################"
+Write-Output "###############################################################################################################"
