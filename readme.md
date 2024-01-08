@@ -561,3 +561,21 @@ const emailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{
         (?:\.[a-z]{2})? : Un groupe non-capturant optionnel pour une seconde extension de domaine, comme .co.uk.
 
     $ : Termine l'expression régulière.
+
+### Pour vérifier une date
+
+Il est possible de faire une vérification de date avec l'ojet `Date` de Javascript.
+
+```js
+const date = new Date('2021-01-01');
+
+console.log(date instanceof Date); // true
+```
+
+## 3. Les design patterns
+
+### 3.1. Le data mapper
+
+Le data mapper est un design pattern qui permet de séparer la logique métier de la logique de persistance. Il permet de faire le lien entre la base de données et le code métier.
+
+### 3.2. L'active record
