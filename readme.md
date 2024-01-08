@@ -24,6 +24,11 @@ Un `objet` est une représentation de quelque chose dans le monde réel. Par exe
 
 Derrière la POO, il y a la notion de **factory** (usine), c'est une fonction de fabrique à `objet`.
 
+Il existe deux types d'objets :
+
+- Les plain objects : ce sont des objets simples, ils n'ont pas de méthodes, ils sont créés avec la syntaxe littérale.
+- Les instances d'objets : ce sont des objets qui ont des méthodes, ils sont créés avec le mot clé `new`.
+
 ### 1.3. Le desing pattern de la Factory
 
 Un design pattern est une solution à un problème récurrent.
@@ -730,7 +735,5 @@ module.exports = level;
 ---
 
 > **La différence principale entre le Data Mapper et l'Active Record réside dans la manière dont ils gèrent la séparation entre la logique métier et la persistance des données. le choix entre Data Mapper et Active Record dépend largement de la complexité de l'application et des besoins en matière de flexibilité, de maintenabilité, et d'évolutivité. Le Data Mapper est préférable pour les grandes applications avec des structures de données complexes et en évolution, tandis que l'Active Record convient mieux aux applications plus simples et plus petites. Certains développeurs considèrent que l'active record est un anti-pattern, car il mélange la logique métier et la logique de persistance des données. Pour une petite application, c'est Ok, car on fait du CRUD simple. Mais pour une grosse application, il vaut mieux utiliser le Data Mapper.**
-
-> Il viole le SRP (Single Responsability Principle) qui dit qu'une classe ne doit avoir qu'une seule responsabilité.
 
 ---
