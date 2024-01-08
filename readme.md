@@ -295,9 +295,48 @@ person.sayHelloArrow(); // Hello, my name is undefined
 
 Cependant, l'utilisation de `this` peut parfois créer de la confusion, surtout lorsqu'on travaille avec des callbacks. Dans ces cas, `this` ne réfère pas toujours à l'objet attendu. Par exemple, si une méthode de classe est passée en tant que callback, le `this` à l'intérieur de cette méthode pourrait ne pas pointer vers l'instance de la classe, mais plutôt vers l'objet qui appelle le callback, ce qui peut mener à des erreurs inattendues.
 
-### 2. L'héritage
+### 1.5. les méthodes statiques
 
-#### 2.1. Qu'est-ce que l'héritage ?
+En JavaScript, le mot-clé `static` est utilisé principalement dans le contexte des classes. Il permet de définir des propriétés ou des méthodes statiques sur une classe. Voici quelques points clés sur l'intérêt et l'utilisation de `static` en JavaScript :
+
+1. **Appartenance à la Classe et non à l'Instance :**
+
+   - Les méthodes et propriétés statiques appartiennent à la classe elle-même, pas à des instances de la classe. Cela signifie que vous pouvez les utiliser sans créer un objet de cette classe.
+
+2. **Utilisation dans les Utilitaires et Helpers :**
+
+   - Les méthodes statiques sont souvent utilisées pour créer des fonctions utilitaires et des helpers. Par exemple, si vous avez une classe Mathématique, vous pourriez avoir des méthodes statiques pour des opérations telles que l'addition ou la multiplication.
+
+3. **Encapsulation :**
+
+   - L'utilisation de méthodes statiques peut contribuer à l'encapsulation en regroupant des fonctionnalités liées à une certaine classe, même si elles ne nécessitent pas d'interagir avec des instances de cette classe.
+
+4. **Réduction de la Redondance :**
+
+   - Les méthodes statiques aident à réduire la redondance du code. Plutôt que de répéter la même fonction dans plusieurs instances, une méthode statique permet de l'écrire une seule fois et de l'appeler sur la classe elle-même.
+
+5. **Exemple d'Utilisation :**
+
+   - Supposons que vous ayez une classe `Util` avec une méthode statique `sayHello`. Vous pouvez appeler `Util.sayHello()` sans avoir besoin de créer une instance de `Util`.
+
+   ```javascript
+   class Util {
+     static sayHello() {
+       console.log('Hello');
+     }
+   }
+
+   Util.sayHello(); // Affiche "Hello"
+   ```
+
+6. **Héritage :**
+   - Les méthodes statiques peuvent être héritées. Si une classe hérite d'une autre, elle hérite aussi de ses méthodes statiques. Cependant, elles restent liées à la classe originale et ne sont pas accessibles via des instances de la classe dérivée.
+
+En résumé, `static` est utilisé pour définir des propriétés et des méthodes qui sont liées à la classe elle-même plutôt qu'à des instances de cette classe. Cela est utile pour des méthodes qui fournissent des fonctionnalités générales ou des utilitaires qui ne nécessitent pas l'accès aux propriétés d'une instance spécifique.
+
+## 2. L'héritage
+
+### 2.1. Qu'est-ce que l'héritage ?
 
 L'héritage est un principe de la `POO` qui permet de créer une classe à partir d'une autre classe. La classe mère est appelée la classe parent et la classe fille est appelée la classe enfant.
 
