@@ -493,3 +493,34 @@ clioProxy.color = 'blue'; // Writing property color
 
 console.log(clioProxy.color); // Reading property color
 ```
+
+### 2.4. Les REGEX
+
+Les expressions régulières (ou `REGEX`) sont des motifs utilisés pour faire des recherches et des remplacements dans les chaînes de caractères, ou pour valider des chaînes de caractères. Elles sont écrites dans une syntaxe concise et flexible, et permettent de rechercher des chaînes de caractères avec un niveau de contrôle très précis.
+
+| Symbole  | Description                                      |
+| -------- | ------------------------------------------------ |
+| \w       | Caractère alphanumérique ou \_                   |
+| \d       | Chiffre                                          |
+| \s       | Espace                                           |
+| \.       | Point                                            |
+| \w+      | Un ou plusieurs caractères alphanumériques ou \_ |
+| \d+      | Un ou plusieurs chiffres                         |
+| /        | Début de l'expression régulière                  |
+| $        | Fin de l'expression régulière                    |
+| [a-zA-Z] | Un caractère entre a et z ou entre A et Z        |
+| {2,3}    | Entre 2 et 3 caractères                          |
+| ^        | Début de la chaîne de caractère                  |
+
+exemple :
+
+```js
+// une regex pour valider un email
+const emailRegex = /\w+@\w+\.[a-zA-Z]{2,3}$/;
+
+// on peut tester si une chaine de caractère est valide avec la méthode test
+console.log(emailRegex.test('azopeopaze')); // false
+console.log(emailRegex.test('azopeopaze@')); // false
+console.log(emailRegex.test('azopeopaze@gmail')); // false
+console.log(emailRegex.test('azeiopaze@gmail.com')); // true
+```
