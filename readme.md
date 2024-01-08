@@ -577,39 +577,7 @@ L'Active Record est un patron de conception utilisé dans le développement de l
 
 L'Active Record est donc un modèle puissant pour structurer l'accès et la manipulation des données dans les applications, en associant étroitement les données avec les comportements et règles les concernant. Cette méthode offre une approche intuitive et efficace pour gérer les interactions avec les bases de données, tout en gardant une structure claire et maintenable.
 
-exemple de code d'un active record pour insérer un nouveau niveau dans une base de données:
-
-```js
-// instanciation du client
-const db = require('../db');
-
-// création de la classe
-class level {
-  id;
-  name;
-
-  constructort(obj) {
-    this.id = obj.id;
-    this.name = obj.name;
-  }
-
-  // méthode pour insérer un nouveau niveau
-  async insert() {
-    const result = await db.query(
-      `INSERT INTO level ("name")
-        VALUES ($1)
-        RETURNING id`,
-      this.name
-    );
-    return result;
-  }
-}
-
-// on exporte la classe
-module.exports = level;
-```
-
-exemple pour un delete, lire, update :
+exemple de code d'un active record :
 
 ```js
 // instanciation du client
@@ -656,7 +624,7 @@ class level {
     }
   }
 
-  // update() et findById() sont des méthodes de classe
+  // update() et findById() sont des méthodes de classe ou méthodes statiques
 
   // méthode pour lire un niveau de id x
   static async findById(researchedID) {
