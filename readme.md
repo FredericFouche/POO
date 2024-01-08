@@ -686,15 +686,34 @@ class level {
   // update() et findById() sont des méthodes de classe
 
   // méthode pour lire un niveau de id x
-  static async findById() {
+  static async findById(researchedID) {
     const result = await db.query(
       `SELECT * FROM level
         WHERE id = $1`,
-      [id]
+      [researchedID]
     );
     if (result.rowCount > 0) {
       // si rowCount est supérieur à 0, cela veut dire qu'une ligne a été trouvée
-      const level = new Level(result.rows[0]); // on crée une instance de la classe avec les données de la base de données
+      const resultLevel = result.rows[0]; // on récupère le niveau trouvé dans la base de données qui est un tableau
+      const level = new Level(resultLevel); // on crée une instance de la classe avec les données du tableau
+      return level; // on retourne l'instance de la classe
+    } else {
+      // sinon, cela veut dire qu'aucune ligne n'a été trouvée
+      return null;
+    }
+  }
+
+  // findbyName(x)
+  static async findByName(researchedName) {
+    const result = await db.query(
+      `SELECT * FROM level
+        WHERE name = $1`,
+      [researchedName]
+    );
+    if (result.rowCount > 0) {
+      // si rowCount est supérieur à 0, cela veut dire qu'une ligne a été trouvée
+      const resultLevel = result.rows[0]; // on récupère le niveau trouvé dans la base de données qui est un tableau
+      const level = new Level(resultLevel); // on crée une instance de la classe avec les données du tableau
       return level; // on retourne l'instance de la classe
     } else {
       // sinon, cela veut dire qu'aucune ligne n'a été trouvée
@@ -709,6 +728,8 @@ module.exports = level;
 
 ---
 
-> **La différence principale entre le Data Mapper et l'Active Record réside dans la manière dont ils gèrent la séparation entre la logique métier et la persistance des données. le choix entre Data Mapper et Active Record dépend largement de la complexité de l'application et des besoins en matière de flexibilité, de maintenabilité, et d'évolutivité. Le Data Mapper est préférable pour les grandes applications avec des structures de données complexes et en évolution, tandis que l'Active Record convient mieux aux applications plus simples et plus petites. Certains développeurs considèrent que l'active record est un anti-pattern, car il mélange la logique métier et la logique de persistance des données.**
+> **La différence principale entre le Data Mapper et l'Active Record réside dans la manière dont ils gèrent la séparation entre la logique métier et la persistance des données. le choix entre Data Mapper et Active Record dépend largement de la complexité de l'application et des besoins en matière de flexibilité, de maintenabilité, et d'évolutivité. Le Data Mapper est préférable pour les grandes applications avec des structures de données complexes et en évolution, tandis que l'Active Record convient mieux aux applications plus simples et plus petites. Certains développeurs considèrent que l'active record est un anti-pattern, car il mélange la logique métier et la logique de persistance des données. Pour une petite application, c'est Ok, car on fait du CRUD simple. Mais pour une grosse application, il vaut mieux utiliser le Data Mapper.**
+
+> Il viole le SRP (Single Responsability Principle) qui dit qu'une classe ne doit avoir qu'une seule responsabilité.
 
 ---
