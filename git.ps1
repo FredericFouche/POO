@@ -15,6 +15,15 @@ git push
 # ### 2020-04-01 14:00:00 ###
 # ###########################
 
+# cas nothing to commit, working tree clean
+
+if (git status | Select-String -Pattern "nothing to commit, working tree clean") {
+    Write-Host "###############################################################################################################" -ForegroundColor Cyan
+    Write-Host "   Aucun changement détecté, rien à commiter !" -ForegroundColor Yellow
+    Write-Host "###############################################################################################################" -ForegroundColor Cyan
+    exit
+}
+
 # Obtenir la date et l'heure du dernier commit dans un format standard ISO 8601
 $commitDateRaw = git log -1 --format=%cI
 
