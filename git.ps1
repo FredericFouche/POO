@@ -8,5 +8,14 @@ git commit -m $commit_message
 # Pousser les modifications vers le dépôt distant
 git push
 
-# Retourner la date et l'heure du commit
-$commit_message
+# Retourner la date et l'heure du commit avec un affichage plus lisible dans la console PowerShell (### le message ###)
+
+# Exemple de sortie dans la console :
+# ###########################
+# ### 2020-04-01 14:00:00 ###
+# ###########################
+
+echo "#############################"
+echo "### $commitDate ###"
+echo "#############################"
+
