@@ -443,4 +443,53 @@ console.log(clio instanceof toyota); // true car clio est une instance de la cla
 console.log(clio instanceof vehicule); // true car clio est une instance qui hérite de la classe vehicule
 ```
 
-### 2.3.
+### 2.3. Les proxy
+
+Un Proxy en JavaScript est un objet spécial qui agit comme un intermédiaire entre un objet cible et les interactions avec cet objet. Il permet de personnaliser les comportements fondamentaux des objets, tels que la lecture et l'écriture des propriétés, l'invocation de fonctions, l'énumération des propriétés, et plus encore. En utilisant un Proxy, vous pouvez intercepter et redéfinir ces opérations fondamentales.
+
+Pour créer un Proxy, vous utilisez le constructeur `new Proxy(target, handler)`. Ici, `target` est l'objet original que vous voulez "proxifier", et `handler` est un objet qui contient des fonctions, appelées "traps" (pièges), qui définissent le comportement personnalisé pour différentes opérations. Par exemple, un trap `get` peut être défini pour intercepter les lectures de propriétés, ou un trap `set` pour intercepter les écritures de propriétés.
+
+Les Proxy sont puissants et flexibles, permettant de nombreux cas d'utilisation avancés tels que la validation des données, la journalisation des opérations, la création d'objets observables (pour la réactivité), et l'implémentation de modèles de programmation sophistiqués. Cependant, cette puissance s'accompagne d'une certaine complexité et, dans certains cas, d'un impact sur les performances. Il est donc recommandé de les utiliser judicieusement et dans des scénarios où leurs avantages l'emportent sur leurs inconvénients potentiels.
+
+exemple :
+
+```js
+class vehicule {
+  wheels;
+  color;
+  enginePower;
+
+  constructor(wheels, color, enginePower) {
+    this.wheels = wheels;
+    this.color = color;
+    this.enginePower = enginePower;
+  }
+}
+
+class toyota extends vehicule {
+  constructor(color, enginePower) {
+    super(4, color, enginePower);
+  }
+}
+
+const clio = new toyota('red', 100);
+
+// on peut créer un proxy pour intercepter les accès aux propriétés de l'objet clio
+
+const clioProxy = new Proxy(clio, {
+  // trap get pour intercepter les accès aux propriétés
+  get(target, property) {
+    console.log(`Reading property ${property}`);
+    return target[property];
+  },
+  // trap set pour intercepter les écritures aux propriétés
+  set(target, property, value) {
+    console.log(`Writing property ${property}`);
+    target[property] = value;
+  },
+});
+
+clioProxy.color = 'blue'; // Writing property color
+
+console.log(clioProxy.color); // Reading property color
+```
