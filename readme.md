@@ -545,6 +545,145 @@ clioProxy.color = 'blue'; // Writing property color
 console.log(clioProxy.color); // Reading property color
 ```
 
+### 2.4 Le polymorphisme
+
+Polymorphisme en Programmation Orientée Objet
+
+Définition :
+Le polymorphisme, du grec "poly" (plusieurs) et "morph" (formes), est la capacité d'une entité à prendre plusieurs formes. En programmation orientée objet (POO), cela se réfère à la capacité d'un type (classe) d'être traité comme le type d'une de ses classes parentes ou d'une interface qu'il implémente.
+
+Types de Polymorphisme :
+Il existe principalement deux types de polymorphisme en POO :
+
+    Polymorphisme Statique (ou Surcharge) : Cela se produit lorsqu'il y a plusieurs méthodes dans une classe avec le même nom mais des signatures différentes (par exemple, nombre ou types de paramètres différents). C'est ce qu'on appelle la surcharge de méthodes.
+
+    Polymorphisme Dynamique (ou Substitution) : Cela se produit lorsqu'une classe enfant remplace ou étend une méthode d'une classe parente. C'est ce qu'on appelle la redéfinition de méthodes (ou "overriding" en anglais). Ce type de polymorphisme est crucial pour l'héritage, permettant à une instance de la classe enfant d'être traitée comme une instance de la classe parente.
+
+Avantages :
+
+    Flexibilité : Le polymorphisme permet aux programmeurs de réutiliser du code et de créer des programmes plus modulaires.
+    Extensibilité : Les programmes deviennent plus extensibles car les nouvelles classes peuvent être ajoutées avec peu ou pas de modification du code existant.
+    Maintenabilité : Il facilite la maintenance du code en regroupant des comportements communs, rendant le code plus lisible et plus facile à gérer.
+
+Exemple en Pratique :
+Considérons une classe parente Animal avec une méthode faireSon(). Des classes filles comme Chat et Chien héritent de Animal et redéfinissent faireSon() pour produire des sons spécifiques à chaque animal.
+
+```javascript
+class Animal {
+  faireSon() {
+    console.log('Quelque son');
+  }
+}
+
+class Chat extends Animal {
+  faireSon() {
+    console.log('Miaou');
+  }
+}
+
+class Chien extends Animal {
+  faireSon() {
+    console.log('Wouaf');
+  }
+}
+
+let monAnimal = new Chat();
+monAnimal.faireSon(); // Affiche "Miaou"
+
+monAnimal = new Chien();
+monAnimal.faireSon(); // Affiche "Wouaf"
+```
+
+Dans cet exemple, monAnimal est une référence de type Animal, mais elle peut se comporter comme un Chat ou un Chien. Le polymorphisme permet à monAnimal de prendre différentes formes, facilitant ainsi la gestion des objets de types différents mais liés par une hiérarchie commune.
+
+### 2.5. Le masquage ou shadowing de propriétés
+
+Le masquage de propriétés est un concept de la POO qui permet de masquer une propriété d'une classe parent dans une classe enfant.
+
+```js
+class Animal {
+  name;
+  static type;
+
+  constructor(obj) {
+    this.type = obj.type;
+    this.name = obj.name;
+  }
+
+  faireSon() {
+    console.log('Quelque son');
+  }
+}
+
+class Chat extends Animal {
+  static type = 'Chat'; // on peut masquer la propriété type de la classe parent
+
+  constructor(obj) {
+    super(obj);
+  }
+
+  faireSon() {
+    console.log('Miaou');
+  }
+}
+
+class Chien extends Animal {
+  static type = 'Chien'; // on peut masquer la propriété type de la classe parent
+
+  constructor(obj) {
+    super(obj);
+  }
+
+  faireSon() {
+    console.log('Wouaf');
+  }
+}
+```
+
+L'objectif est de pouvoir accéder à la propriété type de la classe parent et de la classe enfant quand on en a besoin, par exemple pour dynamiser une méthode pour faire une requête sql dans la classe parente.
+
+```js
+class Animal {
+  name;
+  static type;
+
+  constructor(obj) {
+    this.type = obj.type;
+    this.name = obj.name;
+  }
+
+  faireSon() {
+    console.log('Quelque son');
+  }
+
+  // on peut créer une méthode statique pour faire une requête sql
+  static async findAll() {
+    const result = await db.query(`SELECT * FROM ${this.type}`);
+    return result.rows;
+  }
+}
+
+class Chat extends Animal {
+  static type = 'Chat';
+
+  constructor(obj) {
+    super(obj);
+  }
+
+  faireSon() {
+    console.log('Miaou');
+  }
+}
+```
+
+Ce qui nous permettra de faire ça :
+
+```js
+const chats = await Chat.findAll();
+```
+
+Car le `this.type` dans la méthode statique `findAll` de la classe parente `Animal` sera remplacé par `Chat` quand on appellera la méthode `findAll` sur la classe `Chat`.
+
 ## 3. Les design patterns
 
 ### 3.1. Le Data Mapper
