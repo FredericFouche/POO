@@ -683,6 +683,75 @@ const chats = await Chat.findAll();
 ```
 
 Car le `this.type` dans la méthode statique `findAll` de la classe parente `Animal` sera remplacé par `Chat` quand on appellera la méthode `findAll` sur la classe `Chat`.
+Le cas `this.constructor.type` permet de gérer les situations où vous avez besoin d'accéder à la propriété statique de la classe parente dans une méthode d'instance. Cette approche est utile pour garantir que la méthode d'instance utilise la propriété statique de la classe dans laquelle elle a été définie, et non celle qui a été masquée par la classe enfant.
+
+Poursuivons l'exemple pour illustrer cela :
+
+```js
+class Animal {
+  name;
+  static type = 'Animal';
+
+  constructor(obj) {
+    this.type = obj.type; // Utilise le type passé en objet, si disponible
+    this.name = obj.name;
+  }
+
+  faireSon() {
+    console.log('Quelque son');
+  }
+
+  static async findAll() {
+    const result = await db.query(`SELECT * FROM ${this.type}`);
+    return result.rows;
+  }
+
+  // Méthode d'instance utilisant la propriété statique de la classe parente
+  getType() {
+    return this.constructor.type; // Retourne 'Animal' pour une instance d'Animal, 'Chat' pour Chat, etc.
+  }
+}
+
+class Chat extends Animal {
+  static type = 'Chat'; // Masque la propriété 'type' de la classe parente
+
+  constructor(obj) {
+    super(obj);
+  }
+
+  faireSon() {
+    console.log('Miaou');
+  }
+}
+
+class Chien extends Animal {
+  static type = 'Chien'; // De même pour Chien
+
+  constructor(obj) {
+    super(obj);
+  }
+
+  faireSon() {
+    console.log('Wouaf');
+  }
+}
+
+// Utilisation des méthodes
+const animal = new Animal({});
+console.log(animal.getType()); // Affiche 'Animal'
+
+const chat = new Chat({});
+console.log(chat.getType()); // Affiche 'Chat'
+
+const chien = new Chien({});
+console.log(chien.getType()); // Affiche 'Chien'
+```
+
+Dans ce scénario :
+
+La méthode getType dans la classe Animal utilise this.constructor.type pour accéder à la propriété statique type de la classe. Cela garantit que même si une classe enfant comme Chat ou Chien masque la propriété type, la méthode getType retournera toujours la valeur correcte associée à l'instance actuelle.
+
+Quand getType est appelée sur une instance de Chat, elle retourne 'Chat', et de même pour Chien, ce qui montre l'utilisation du masquage pour personnaliser le comportement des sous-classes tout en conservant la capacité d'accéder aux propriétés et méthodes de la classe parente.
 
 ## 3. Les design patterns
 
