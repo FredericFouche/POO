@@ -16,11 +16,7 @@ if (git status | Select-String -Pattern "nothing to commit, working tree clean")
         @{ Name = "docs"; Description = "Mise à jour de la documentation" },
         @{ Name = "test"; Description = "Ajout ou mise à jour de tests" },
         @{ Name = "chore"; Description = "Mise à jour de tâches automatisées" },
-        @{ Name = "style"; Description = "Mise à jour de l'indentation, des espaces, etc." },
-        @{ Name = "perf"; Description = "Amélioration des performances" },
-        @{ Name = "ci"; Description = "Mise à jour de la configuration CI" },
-        @{ Name = "build"; Description = "Mise à jour de la configuration de build" },
-        @{ Name = "revert"; Description = "Revert d'un commit" }
+        @{ Name = "style"; Description = "Mise à jour de l'indentation, des espaces, etc." }
     )
 
     # Afficher les types de commit et demander à l'utilisateur de choisir
