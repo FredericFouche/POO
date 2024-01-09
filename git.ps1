@@ -39,7 +39,7 @@ if (git status | Select-String -Pattern "nothing to commit, working tree clean")
     }
 
     # Créer le message de commit
-    $commit_message = "${selectedCommitType}: save $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+    $commit_message = "${selectedCommitType}: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
     git commit -m $commit_message
 
     # Pousser les modifications vers le dépôt distant
